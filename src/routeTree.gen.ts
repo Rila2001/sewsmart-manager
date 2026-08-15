@@ -14,6 +14,7 @@ import { Route as ActivityRouteImport } from './routes/activity'
 import { Route as AssignRouteImport } from './routes/assign'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ProductsRouteImport } from './routes/products'
+import { Route as RolesRouteImport } from './routes/roles'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const ProductsRoute = ProductsRouteImport.update({
   path: '/products',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RolesRoute = RolesRouteImport.update({
+  id: '/roles',
+  path: '/roles',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/assign': typeof AssignRoute
   '/dashboard': typeof DashboardRoute
   '/products': typeof ProductsRoute
+  '/roles': typeof RolesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/assign': typeof AssignRoute
   '/dashboard': typeof DashboardRoute
   '/products': typeof ProductsRoute
+  '/roles': typeof RolesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,22 @@ export interface FileRoutesById {
   '/assign': typeof AssignRoute
   '/dashboard': typeof DashboardRoute
   '/products': typeof ProductsRoute
+  '/roles': typeof RolesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/activity' | '/assign' | '/dashboard' | '/products'
+  fullPaths:
+    '/' | '/activity' | '/assign' | '/dashboard' | '/products' | '/roles'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/activity' | '/assign' | '/dashboard' | '/products'
-  id: '__root__' | '/' | '/activity' | '/assign' | '/dashboard' | '/products'
+  to: '/' | '/activity' | '/assign' | '/dashboard' | '/products' | '/roles'
+  id:
+    | '__root__'
+    | '/'
+    | '/activity'
+    | '/assign'
+    | '/dashboard'
+    | '/products'
+    | '/roles'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +94,7 @@ export interface RootRouteChildren {
   AssignRoute: typeof AssignRoute
   DashboardRoute: typeof DashboardRoute
   ProductsRoute: typeof ProductsRoute
+  RolesRoute: typeof RolesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roles': {
+      id: '/roles'
+      path: '/roles'
+      fullPath: '/roles'
+      preLoaderRoute: typeof RolesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +150,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssignRoute: AssignRoute,
   DashboardRoute: DashboardRoute,
   ProductsRoute: ProductsRoute,
+  RolesRoute: RolesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
