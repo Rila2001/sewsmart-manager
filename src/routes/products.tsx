@@ -63,7 +63,7 @@ const EMPTY = {
   category: "Cutting Blade",
   machine: "Overlock 5-Thread",
   description: "",
-  imageKey: IMAGE_OPTIONS[0],
+  imageKey: "movie-knife",
   quantity: 0,
 };
 
